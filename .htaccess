@@ -1,0 +1,16 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME}.php -f
+	RewriteRule ^(.*)$ $1.php [L] 
+	# permet de ne pas voir l'extension .php des pages dans la barre URL.
+	# On y retrouve l�accent circonflexe (d�but) et le dollar (fin).
+	# Les parenth�ses permettent elles de copier ce que l�on trouve dedans vers une variable de type $n. Dans notre cas tout ce qui est trouv� par l�expression .* va se retrouver dans la variable $1.
+	# Pour finir, le point signifie n�importe quel caract�re et l�ast�risque la r�p�tition. (.*) met dans la variable $1 tout ce qui suit le domaine. Dans http://localhost/php/poo/web/inscription, $1 sera �gale � inscription
+	# [L] veut dire que la condition est fini.
+	# Nous allons r�cup�rer tout ce qui ce trouve derri�re le domaine. Cette �tape est faite par la regex ^(.*)$.
+	# -f : Traite � Cha�ne_de_test � comme un chemin, v�rifie s'il existe ou pas, et s'il s'agit d'un fichier r�gulier.
+
+	RewriteRule ^web - [L]
+	RewriteRule .* http://localhost/php/site_mvc/web/$0 [L]
+
+	# le tiret - permet de mettre le [L] drapeau pour LAST, sinon il tenterait d'�crire web/[L] directement dans l'url.
+
